@@ -22,6 +22,8 @@
 #include "MemStream.h"
 #include "FileStream.h"
 
+#pragma warning (disable : 4996)
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif

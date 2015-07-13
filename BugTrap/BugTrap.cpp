@@ -564,7 +564,7 @@ BOOL WINAPI DllMain(HINSTANCE hModule, DWORD fdwReason, PVOID pvReserved)
 /**
  * @return current BugTrap options.
  */
-extern "C" BUGTRAP_API DWORD APIENTRY BT_GetFlags(void)
+extern "C" BUGTRAP_API DWORD BUGTRAP_API_CALL BT_GetFlags(void)
 {
 	return g_dwFlags;
 }
@@ -572,7 +572,7 @@ extern "C" BUGTRAP_API DWORD APIENTRY BT_GetFlags(void)
 /**
  * @param dwFlags - new BugTrap options.
  */
-extern "C" BUGTRAP_API void APIENTRY BT_SetFlags(DWORD dwFlags)
+extern "C" BUGTRAP_API void BUGTRAP_API_CALL BT_SetFlags(DWORD dwFlags)
 {
 	g_dwFlags = dwFlags;
 }
@@ -612,7 +612,7 @@ extern "C" BUGTRAP_API LONG CALLBACK BT_NetFilter(PEXCEPTION_POINTERS pException
 /**
  * @return application name.
  */
-extern "C" BUGTRAP_API PCTSTR APIENTRY BT_GetAppName(void)
+extern "C" BUGTRAP_API PCTSTR BUGTRAP_API_CALL BT_GetAppName(void)
 {
 	return g_szAppName;
 }
@@ -620,7 +620,7 @@ extern "C" BUGTRAP_API PCTSTR APIENTRY BT_GetAppName(void)
 /**
  * @param pszAppName - application name.
  */
-extern "C" BUGTRAP_API void APIENTRY BT_SetAppName(PCTSTR pszAppName)
+extern "C" BUGTRAP_API void BUGTRAP_API_CALL BT_SetAppName(PCTSTR pszAppName)
 {
 	if (pszAppName)
 		_tcscpy_s(g_szAppName, countof(g_szAppName), pszAppName);
@@ -631,7 +631,7 @@ extern "C" BUGTRAP_API void APIENTRY BT_SetAppName(PCTSTR pszAppName)
 /**
  * @return user-defined application version number.
  */
-extern "C" BUGTRAP_API PCTSTR APIENTRY BT_GetAppVersion(void)
+extern "C" BUGTRAP_API PCTSTR BUGTRAP_API_CALL BT_GetAppVersion(void)
 {
 	return g_szAppVersion;
 }
@@ -639,7 +639,7 @@ extern "C" BUGTRAP_API PCTSTR APIENTRY BT_GetAppVersion(void)
 /**
  * @param pszAppVersion - user-defined application version number.
  */
-extern "C" BUGTRAP_API void APIENTRY BT_SetAppVersion(PCTSTR pszAppVersion)
+extern "C" BUGTRAP_API void BUGTRAP_API_CALL BT_SetAppVersion(PCTSTR pszAppVersion)
 {
 	if (pszAppVersion)
 		_tcscpy_s(g_szAppVersion, countof(g_szAppVersion), pszAppVersion);
@@ -650,7 +650,7 @@ extern "C" BUGTRAP_API void APIENTRY BT_SetAppVersion(PCTSTR pszAppVersion)
 /**
  * @return web address of product support site.
  */
-extern "C" BUGTRAP_API PCTSTR APIENTRY BT_GetSupportURL(void)
+extern "C" BUGTRAP_API PCTSTR BUGTRAP_API_CALL BT_GetSupportURL(void)
 {
 	return g_szSupportURL;
 }
@@ -658,7 +658,7 @@ extern "C" BUGTRAP_API PCTSTR APIENTRY BT_GetSupportURL(void)
 /**
  * @param pszSupportURL - web address of product support site.
  */
-extern "C" BUGTRAP_API void APIENTRY BT_SetSupportURL(PCTSTR pszSupportURL)
+extern "C" BUGTRAP_API void BUGTRAP_API_CALL BT_SetSupportURL(PCTSTR pszSupportURL)
 {
 	if (pszSupportURL)
 		_tcscpy_s(g_szSupportURL, countof(g_szSupportURL), pszSupportURL);
@@ -669,7 +669,7 @@ extern "C" BUGTRAP_API void APIENTRY BT_SetSupportURL(PCTSTR pszSupportURL)
 /**
  * @return e-mail address of product support.
  */
-extern "C" BUGTRAP_API PCTSTR APIENTRY BT_GetSupportEMail(void)
+extern "C" BUGTRAP_API PCTSTR BUGTRAP_API_CALL BT_GetSupportEMail(void)
 {
 	return g_szSupportEMail;
 }
@@ -677,7 +677,7 @@ extern "C" BUGTRAP_API PCTSTR APIENTRY BT_GetSupportEMail(void)
 /**
  * @param pszSupportEMail - e-mail address of product support.
  */
-extern "C" BUGTRAP_API void APIENTRY BT_SetSupportEMail(PCTSTR pszSupportEMail)
+extern "C" BUGTRAP_API void BUGTRAP_API_CALL BT_SetSupportEMail(PCTSTR pszSupportEMail)
 {
 	if (pszSupportEMail)
 		_tcscpy_s(g_szSupportEMail, countof(g_szSupportEMail), pszSupportEMail);
@@ -688,7 +688,7 @@ extern "C" BUGTRAP_API void APIENTRY BT_SetSupportEMail(PCTSTR pszSupportEMail)
 /**
  * @return e-mail address of error notification.
  */
-extern "C" BUGTRAP_API PCTSTR APIENTRY BT_GetNotificationEMail(void)
+extern "C" BUGTRAP_API PCTSTR BUGTRAP_API_CALL BT_GetNotificationEMail(void)
 {
 	return g_szNotificationEMail;
 }
@@ -696,7 +696,7 @@ extern "C" BUGTRAP_API PCTSTR APIENTRY BT_GetNotificationEMail(void)
 /**
  * @param pszNotificationEMail - e-mail address of error notification.
  */
-extern "C" BUGTRAP_API void APIENTRY BT_SetNotificationEMail(PCTSTR pszNotificationEMail)
+extern "C" BUGTRAP_API void BUGTRAP_API_CALL BT_SetNotificationEMail(PCTSTR pszNotificationEMail)
 {
 	if (pszNotificationEMail)
 		_tcscpy_s(g_szNotificationEMail, countof(g_szNotificationEMail), pszNotificationEMail);
@@ -707,7 +707,7 @@ extern "C" BUGTRAP_API void APIENTRY BT_SetNotificationEMail(PCTSTR pszNotificat
 /**
  * @return host name of product support server where BugTrapServer is installed.
  */
-extern "C" BUGTRAP_API PCTSTR APIENTRY BT_GetSupportHost(void)
+extern "C" BUGTRAP_API PCTSTR BUGTRAP_API_CALL BT_GetSupportHost(void)
 {
 	return g_szSupportHost;
 }
@@ -715,7 +715,7 @@ extern "C" BUGTRAP_API PCTSTR APIENTRY BT_GetSupportHost(void)
 /**
  * @return port number of product support server where BugTrapServer is installed.
  */
-extern "C" BUGTRAP_API SHORT APIENTRY BT_GetSupportPort(void)
+extern "C" BUGTRAP_API SHORT BUGTRAP_API_CALL BT_GetSupportPort(void)
 {
 	return g_nSupportPort;
 }
@@ -723,7 +723,7 @@ extern "C" BUGTRAP_API SHORT APIENTRY BT_GetSupportPort(void)
 /**
  * @param pszSupportHost - host name of product support server where BugTrapServer is installed.
  */
-extern "C" BUGTRAP_API void APIENTRY BT_SetSupportHost(LPCTSTR pszSupportHost)
+extern "C" BUGTRAP_API void BUGTRAP_API_CALL BT_SetSupportHost(LPCTSTR pszSupportHost)
 {
 	if (pszSupportHost)
 		_tcscpy_s(g_szSupportHost, countof(g_szSupportHost), pszSupportHost);
@@ -734,7 +734,7 @@ extern "C" BUGTRAP_API void APIENTRY BT_SetSupportHost(LPCTSTR pszSupportHost)
 /**
  * @param nSupportPort - port number of product support server where BugTrapServer is installed.
  */
-extern "C" BUGTRAP_API void APIENTRY BT_SetSupportPort(SHORT nSupportPort)
+extern "C" BUGTRAP_API void BUGTRAP_API_CALL BT_SetSupportPort(SHORT nSupportPort)
 {
 	g_nSupportPort = nSupportPort;
 }
@@ -743,13 +743,13 @@ extern "C" BUGTRAP_API void APIENTRY BT_SetSupportPort(SHORT nSupportPort)
  * @param pszSupportHost - host name of product support server where BugTrapServer is installed.
  * @param nSupportPort - port number of product support server where BugTrapServer is installed.
  */
-extern "C" BUGTRAP_API void APIENTRY BT_SetSupportServer(PCTSTR pszSupportHost, SHORT nSupportPort)
+extern "C" BUGTRAP_API void BUGTRAP_API_CALL BT_SetSupportServer(PCTSTR pszSupportHost, SHORT nSupportPort)
 {
 	BT_SetSupportHost(pszSupportHost);
 	BT_SetSupportPort(nSupportPort);
 }
 
-extern "C" BUGTRAP_API void APIENTRY BT_ClearLogFiles(void)
+extern "C" BUGTRAP_API void BUGTRAP_API_CALL BT_ClearLogFiles(void)
 {
 	g_arrLogLinks.DeleteAll(true);
 }
@@ -757,7 +757,7 @@ extern "C" BUGTRAP_API void APIENTRY BT_ClearLogFiles(void)
 /**
  * @return number of log files attached to the report.
  */
-extern "C" BUGTRAP_API DWORD APIENTRY BT_GetLogFilesCount(void)
+extern "C" BUGTRAP_API DWORD BUGTRAP_API_CALL BT_GetLogFilesCount(void)
 {
 	return (DWORD)g_arrLogLinks.GetCount();
 }
@@ -791,7 +791,7 @@ static size_t FindLogLink(PCTSTR pszLogFile)
  * @param pLogEntry - log entry data.
  * @return error status.
  */
-extern "C" BUGTRAP_API DWORD APIENTRY BT_GetLogFileEntry(INT_PTR nLogFileIndexOrName, BOOL bGetByIndex, BUGTRAP_LOGTYPE* peLogType, PDWORD pdwLogEntrySize, PVOID pLogEntry)
+extern "C" BUGTRAP_API DWORD BUGTRAP_API_CALL BT_GetLogFileEntry(INT_PTR nLogFileIndexOrName, BOOL bGetByIndex, BUGTRAP_LOGTYPE* peLogType, PDWORD pdwLogEntrySize, PVOID pLogEntry)
 {
 	if (bGetByIndex)
 	{
@@ -869,7 +869,7 @@ extern "C" BUGTRAP_API DWORD APIENTRY BT_GetLogFileEntry(INT_PTR nLogFileIndexOr
 /**
  * @param pszLogFile - custom log file name.
  */
-extern "C" BUGTRAP_API void APIENTRY BT_AddLogFile(PCTSTR pszLogFile)
+extern "C" BUGTRAP_API void BUGTRAP_API_CALL BT_AddLogFile(PCTSTR pszLogFile)
 {
 	if (pszLogFile && *pszLogFile)
 	{
@@ -886,7 +886,7 @@ extern "C" BUGTRAP_API void APIENTRY BT_AddLogFile(PCTSTR pszLogFile)
  * @param pszRegFile - custom log file name.
  * @param pszRegKey - registry key to be exported.
  */
-extern "C" BUGTRAP_API void APIENTRY BT_AddRegFile(LPCTSTR pszRegFile, PCTSTR pszRegKey)
+extern "C" BUGTRAP_API void BUGTRAP_API_CALL BT_AddRegFile(LPCTSTR pszRegFile, PCTSTR pszRegKey)
 {
 	if (pszRegFile && *pszRegFile)
 	{
@@ -902,7 +902,7 @@ extern "C" BUGTRAP_API void APIENTRY BT_AddRegFile(LPCTSTR pszRegFile, PCTSTR ps
 /**
  * @param pszLogFile - custom log file name.
  */
-extern "C" BUGTRAP_API void APIENTRY BT_DeleteLogFile(PCTSTR pszLogFile)
+extern "C" BUGTRAP_API void BUGTRAP_API_CALL BT_DeleteLogFile(PCTSTR pszLogFile)
 {
 	if (pszLogFile && *pszLogFile)
 	{
@@ -915,7 +915,7 @@ extern "C" BUGTRAP_API void APIENTRY BT_DeleteLogFile(PCTSTR pszLogFile)
 /**
  * @return address of error handler called before BugTrap dialog.
  */
-extern "C" BUGTRAP_API BT_ErrHandler APIENTRY BT_GetPreErrHandler(void)
+extern "C" BUGTRAP_API BT_ErrHandler BUGTRAP_API_CALL BT_GetPreErrHandler(void)
 {
 	return g_pfnPreErrHandler;
 }
@@ -924,7 +924,7 @@ extern "C" BUGTRAP_API BT_ErrHandler APIENTRY BT_GetPreErrHandler(void)
  * @param pfnPreErrHandler - address of error handler called before BugTrap dialog.
  * @param nPreErrHandlerParam - user-defined parameter of error handler called before BugTrap dialog.
  */
-extern "C" BUGTRAP_API void APIENTRY BT_SetPreErrHandler(BT_ErrHandler pfnPreErrHandler, INT_PTR nPreErrHandlerParam)
+extern "C" BUGTRAP_API void BUGTRAP_API_CALL BT_SetPreErrHandler(BT_ErrHandler pfnPreErrHandler, INT_PTR nPreErrHandlerParam)
 {
 	g_pfnPreErrHandler = pfnPreErrHandler;
 	g_nPreErrHandlerParam = nPreErrHandlerParam;
@@ -933,7 +933,7 @@ extern "C" BUGTRAP_API void APIENTRY BT_SetPreErrHandler(BT_ErrHandler pfnPreErr
 /**
  * @return address of error handler called after BugTrap dialog.
  */
-extern "C" BUGTRAP_API BT_ErrHandler APIENTRY BT_GetPostErrHandler(void)
+extern "C" BUGTRAP_API BT_ErrHandler BUGTRAP_API_CALL BT_GetPostErrHandler(void)
 {
 	return g_pfnPostErrHandler;
 }
@@ -942,7 +942,7 @@ extern "C" BUGTRAP_API BT_ErrHandler APIENTRY BT_GetPostErrHandler(void)
  * @param pfnPostErrHandler - address of error handler called after BugTrap dialog.
  * @param nPostErrHandlerParam - user-defined parameter of error handler called after BugTrap dialog.
  */
-extern "C" BUGTRAP_API void APIENTRY BT_SetPostErrHandler(BT_ErrHandler pfnPostErrHandler, INT_PTR nPostErrHandlerParam)
+extern "C" BUGTRAP_API void BUGTRAP_API_CALL BT_SetPostErrHandler(BT_ErrHandler pfnPostErrHandler, INT_PTR nPostErrHandlerParam)
 {
 	g_pfnPostErrHandler = pfnPostErrHandler;
 	g_nPostErrHandlerParam = nPostErrHandlerParam;
@@ -952,7 +952,7 @@ extern "C" BUGTRAP_API void APIENTRY BT_SetPostErrHandler(BT_ErrHandler pfnPostE
  * @param iHandle - log file handle.
  * @return custom log file name.
  */
-extern "C" BUGTRAP_API PCTSTR APIENTRY BT_GetLogFileName(INT_PTR iHandle)
+extern "C" BUGTRAP_API PCTSTR BUGTRAP_API_CALL BT_GetLogFileName(INT_PTR iHandle)
 {
 	CLogFile* pLogFile = EnterLogFunction(iHandle);
 	if (! pLogFile)
@@ -966,7 +966,7 @@ extern "C" BUGTRAP_API PCTSTR APIENTRY BT_GetLogFileName(INT_PTR iHandle)
  * @param iHandle - log file handle.
  * @return maximum size of log file in records.
  */
-extern "C" BUGTRAP_API DWORD APIENTRY BT_GetLogSizeInEntries(INT_PTR iHandle)
+extern "C" BUGTRAP_API DWORD BUGTRAP_API_CALL BT_GetLogSizeInEntries(INT_PTR iHandle)
 {
 	CLogFile* pLogFile = EnterLogFunction(iHandle);
 	if (! pLogFile)
@@ -981,7 +981,7 @@ extern "C" BUGTRAP_API DWORD APIENTRY BT_GetLogSizeInEntries(INT_PTR iHandle)
  * @param dwLogSizeInEntries - maximum size of log file in records; pass MAXDWORD for unlimited log.
  * @return true if operation was accepted.
  */
-extern "C" BUGTRAP_API BOOL APIENTRY BT_SetLogSizeInEntries(INT_PTR iHandle, DWORD dwLogSizeInEntries)
+extern "C" BUGTRAP_API BOOL BUGTRAP_API_CALL BT_SetLogSizeInEntries(INT_PTR iHandle, DWORD dwLogSizeInEntries)
 {
 	CLogFile* pLogFile = EnterLogFunction(iHandle);
 	if (! pLogFile)
@@ -995,7 +995,7 @@ extern "C" BUGTRAP_API BOOL APIENTRY BT_SetLogSizeInEntries(INT_PTR iHandle, DWO
  * @param iHandle - log file handle.
  * @return maximum size of log file in records.
  */
-extern "C" BUGTRAP_API DWORD APIENTRY BT_GetLogSizeInBytes(INT_PTR iHandle)
+extern "C" BUGTRAP_API DWORD BUGTRAP_API_CALL BT_GetLogSizeInBytes(INT_PTR iHandle)
 {
 	CLogFile* pLogFile = EnterLogFunction(iHandle);
 	if (! pLogFile)
@@ -1010,7 +1010,7 @@ extern "C" BUGTRAP_API DWORD APIENTRY BT_GetLogSizeInBytes(INT_PTR iHandle)
  * @param dwLogSizeInBytes - maximum size of log file in records; pass MAXDWORD for unlimited log.
  * @return true if operation was accepted.
  */
-extern "C" BUGTRAP_API BOOL APIENTRY BT_SetLogSizeInBytes(INT_PTR iHandle, DWORD dwLogSizeInBytes)
+extern "C" BUGTRAP_API BOOL BUGTRAP_API_CALL BT_SetLogSizeInBytes(INT_PTR iHandle, DWORD dwLogSizeInBytes)
 {
 	CLogFile* pLogFile = EnterLogFunction(iHandle);
 	if (! pLogFile)
@@ -1024,7 +1024,7 @@ extern "C" BUGTRAP_API BOOL APIENTRY BT_SetLogSizeInBytes(INT_PTR iHandle, DWORD
  * @param iHandle - log file handle.
  * @return current set of log flags.
  */
-extern "C" BUGTRAP_API DWORD APIENTRY BT_GetLogFlags(INT_PTR iHandle)
+extern "C" BUGTRAP_API DWORD BUGTRAP_API_CALL BT_GetLogFlags(INT_PTR iHandle)
 {
 	CLogFile* pLogFile = EnterLogFunction(iHandle);
 	if (! pLogFile)
@@ -1039,7 +1039,7 @@ extern "C" BUGTRAP_API DWORD APIENTRY BT_GetLogFlags(INT_PTR iHandle)
  * @param dwLogFlags - set of log flags.
  * @return true if operation was completed successfully.
  */
-extern "C" BUGTRAP_API BOOL APIENTRY BT_SetLogFlags(INT_PTR iHandle, DWORD dwLogFlags)
+extern "C" BUGTRAP_API BOOL BUGTRAP_API_CALL BT_SetLogFlags(INT_PTR iHandle, DWORD dwLogFlags)
 {
 	CLogFile* pLogFile = EnterLogFunction(iHandle);
 	if (! pLogFile)
@@ -1053,7 +1053,7 @@ extern "C" BUGTRAP_API BOOL APIENTRY BT_SetLogFlags(INT_PTR iHandle, DWORD dwLog
  * @param iHandle - log file handle.
  * @return minimal log level accepted by tracing functions.
  */
-extern "C" BUGTRAP_API BUGTRAP_LOGLEVEL APIENTRY BT_GetLogLevel(INT_PTR iHandle)
+extern "C" BUGTRAP_API BUGTRAP_LOGLEVEL BUGTRAP_API_CALL BT_GetLogLevel(INT_PTR iHandle)
 {
 	CLogFile* pLogFile = EnterLogFunction(iHandle);
 	if (! pLogFile)
@@ -1068,7 +1068,7 @@ extern "C" BUGTRAP_API BUGTRAP_LOGLEVEL APIENTRY BT_GetLogLevel(INT_PTR iHandle)
  * @param eLogLevel - minimal logl level accepted by tracing functions.
  * @return true if operation was completed successfully.
  */
-extern "C" BUGTRAP_API BOOL APIENTRY BT_SetLogLevel(INT_PTR iHandle, BUGTRAP_LOGLEVEL eLogLevel)
+extern "C" BUGTRAP_API BOOL BUGTRAP_API_CALL BT_SetLogLevel(INT_PTR iHandle, BUGTRAP_LOGLEVEL eLogLevel)
 {
 	CLogFile* pLogFile = EnterLogFunction(iHandle);
 	if (! pLogFile)
@@ -1082,7 +1082,7 @@ extern "C" BUGTRAP_API BOOL APIENTRY BT_SetLogLevel(INT_PTR iHandle, BUGTRAP_LOG
  * @param iHandle - log file handle.
  * @return current echo mode.
  */
-extern "C" BUGTRAP_API DWORD APIENTRY BT_GetLogEchoMode(INT_PTR iHandle)
+extern "C" BUGTRAP_API DWORD BUGTRAP_API_CALL BT_GetLogEchoMode(INT_PTR iHandle)
 {
 	CLogFile* pLogFile = EnterLogFunction(iHandle);
 	if (! pLogFile)
@@ -1097,7 +1097,7 @@ extern "C" BUGTRAP_API DWORD APIENTRY BT_GetLogEchoMode(INT_PTR iHandle)
  * @param dwLogEchoMode - new echo mode.
  * @return true if operation was completed successfully.
  */
-extern "C" BUGTRAP_API BOOL APIENTRY BT_SetLogEchoMode(INT_PTR iHandle, DWORD dwLogEchoMode)
+extern "C" BUGTRAP_API BOOL BUGTRAP_API_CALL BT_SetLogEchoMode(INT_PTR iHandle, DWORD dwLogEchoMode)
 {
 	CLogFile* pLogFile = EnterLogFunction(iHandle);
 	if (! pLogFile)
@@ -1139,7 +1139,7 @@ extern "C" BUGTRAP_API void CDECL BT_CallNetFilter(void)
  * @param pszEntry - text of message.
  * @return true if operation was completed successfully.
  */
-extern "C" BUGTRAP_API BOOL APIENTRY BT_InsLogEntry(INT_PTR iHandle, BUGTRAP_LOGLEVEL eLogLevel, PCTSTR pszEntry)
+extern "C" BUGTRAP_API BOOL BUGTRAP_API_CALL BT_InsLogEntry(INT_PTR iHandle, BUGTRAP_LOGLEVEL eLogLevel, PCTSTR pszEntry)
 {
 	return WriteLogEntry(iHandle, eLogLevel, CLogFile::EM_INSERT, pszEntry);
 }
@@ -1150,7 +1150,7 @@ extern "C" BUGTRAP_API BOOL APIENTRY BT_InsLogEntry(INT_PTR iHandle, BUGTRAP_LOG
  * @param pszEntry - text of message.
  * @return true if operation was completed successfully.
  */
-extern "C" BUGTRAP_API BOOL APIENTRY BT_AppLogEntry(INT_PTR iHandle, BUGTRAP_LOGLEVEL eLogLevel, PCTSTR pszEntry)
+extern "C" BUGTRAP_API BOOL BUGTRAP_API_CALL BT_AppLogEntry(INT_PTR iHandle, BUGTRAP_LOGLEVEL eLogLevel, PCTSTR pszEntry)
 {
 	return WriteLogEntry(iHandle, eLogLevel, CLogFile::EM_APPEND, pszEntry);
 }
@@ -1177,7 +1177,7 @@ extern "C" BUGTRAP_API BOOL CDECL BT_AppLogEntryF(INT_PTR iHandle, BUGTRAP_LOGLE
  * @param argList - variable length argument list.
  * @return true if operation was completed successfully.
  */
-extern "C" BUGTRAP_API BOOL APIENTRY BT_AppLogEntryV(INT_PTR iHandle, BUGTRAP_LOGLEVEL eLogLevel, PCTSTR pszFormat, va_list argList)
+extern "C" BUGTRAP_API BOOL BUGTRAP_API_CALL BT_AppLogEntryV(INT_PTR iHandle, BUGTRAP_LOGLEVEL eLogLevel, PCTSTR pszFormat, va_list argList)
 {
 	return WriteLogEntry(iHandle, eLogLevel, CLogFile::EM_APPEND, pszFormat, argList);
 }
@@ -1204,7 +1204,7 @@ extern "C" BUGTRAP_API BOOL CDECL BT_InsLogEntryF(INT_PTR iHandle, BUGTRAP_LOGLE
  * @param argList - variable length argument list.
  * @return true if operation was completed successfully.
  */
-extern "C" BUGTRAP_API BOOL APIENTRY BT_InsLogEntryV(INT_PTR iHandle, BUGTRAP_LOGLEVEL eLogLevel, PCTSTR pszFormat, va_list argList)
+extern "C" BUGTRAP_API BOOL BUGTRAP_API_CALL BT_InsLogEntryV(INT_PTR iHandle, BUGTRAP_LOGLEVEL eLogLevel, PCTSTR pszFormat, va_list argList)
 {
 	return WriteLogEntry(iHandle, eLogLevel, CLogFile::EM_INSERT, pszFormat, argList);
 }
@@ -1213,7 +1213,7 @@ extern "C" BUGTRAP_API BOOL APIENTRY BT_InsLogEntryV(INT_PTR iHandle, BUGTRAP_LO
  * @param iHandle - log file handle.
  * @return true if operation was completed successfully.
  */
-extern "C" BUGTRAP_API BOOL APIENTRY BT_ClearLog(INT_PTR iHandle)
+extern "C" BUGTRAP_API BOOL BUGTRAP_API_CALL BT_ClearLog(INT_PTR iHandle)
 {
 	CLogFile* pLogFile = EnterLogFunction(iHandle);
 	if (! pLogFile)
@@ -1227,7 +1227,7 @@ extern "C" BUGTRAP_API BOOL APIENTRY BT_ClearLog(INT_PTR iHandle)
 /**
  * @return type of produced mini-dump.
  */
-extern "C" BUGTRAP_API DWORD APIENTRY BT_GetDumpType(void)
+extern "C" BUGTRAP_API DWORD BUGTRAP_API_CALL BT_GetDumpType(void)
 {
 	return g_eDumpType;
 }
@@ -1235,7 +1235,7 @@ extern "C" BUGTRAP_API DWORD APIENTRY BT_GetDumpType(void)
 /**
  * @param dwDumpType - type of produced mini-dump.
  */
-extern "C" BUGTRAP_API void APIENTRY BT_SetDumpType(DWORD dwDumpType)
+extern "C" BUGTRAP_API void BUGTRAP_API_CALL BT_SetDumpType(DWORD dwDumpType)
 {
 	g_eDumpType = (MINIDUMP_TYPE)dwDumpType;
 }
@@ -1243,7 +1243,7 @@ extern "C" BUGTRAP_API void APIENTRY BT_SetDumpType(DWORD dwDumpType)
 /**
  * @return the type of BugTrap action.
  */
-extern "C" BUGTRAP_API BUGTRAP_ACTIVITY APIENTRY BT_GetActivityType(void)
+extern "C" BUGTRAP_API BUGTRAP_ACTIVITY BUGTRAP_API_CALL BT_GetActivityType(void)
 {
 	return g_eActivityType;
 }
@@ -1252,7 +1252,7 @@ extern "C" BUGTRAP_API BUGTRAP_ACTIVITY APIENTRY BT_GetActivityType(void)
  * @brief Get application termination mode.
  * @return current application termination mode.
  */
-extern "C" BUGTRAP_API BUGTRAP_EXITMODE APIENTRY BT_GetExitMode(void)
+extern "C" BUGTRAP_API BUGTRAP_EXITMODE BUGTRAP_API_CALL BT_GetExitMode(void)
 {
 	return g_eExitMode;
 }
@@ -1260,7 +1260,7 @@ extern "C" BUGTRAP_API BUGTRAP_EXITMODE APIENTRY BT_GetExitMode(void)
 /**
  * @return format of error report.
  */
-extern "C" BUGTRAP_API BUGTRAP_REPORTFORMAT APIENTRY BT_GetReportFormat(void)
+extern "C" BUGTRAP_API BUGTRAP_REPORTFORMAT BUGTRAP_API_CALL BT_GetReportFormat(void)
 {
 	return g_eReportFormat;
 }
@@ -1268,7 +1268,7 @@ extern "C" BUGTRAP_API BUGTRAP_REPORTFORMAT APIENTRY BT_GetReportFormat(void)
 /**
  * @param eReportFormat - format of error report.
  */
-extern "C" BUGTRAP_API void APIENTRY BT_SetReportFormat(BUGTRAP_REPORTFORMAT eReportFormat)
+extern "C" BUGTRAP_API void BUGTRAP_API_CALL BT_SetReportFormat(BUGTRAP_REPORTFORMAT eReportFormat)
 {
 	g_eReportFormat = eReportFormat;
 }
@@ -1276,7 +1276,7 @@ extern "C" BUGTRAP_API void APIENTRY BT_SetReportFormat(BUGTRAP_REPORTFORMAT eRe
 /**
  * @param eActivityType - the type of BugTrap action.
  */
-extern "C" BUGTRAP_API void APIENTRY BT_SetActivityType(BUGTRAP_ACTIVITY eActivityType)
+extern "C" BUGTRAP_API void BUGTRAP_API_CALL BT_SetActivityType(BUGTRAP_ACTIVITY eActivityType)
 {
 	g_eActivityType = eActivityType;
 }
@@ -1285,7 +1285,7 @@ extern "C" BUGTRAP_API void APIENTRY BT_SetActivityType(BUGTRAP_ACTIVITY eActivi
  * @brief Set application termination mode.
  * @param eExitMode - new application termination mode.
  */
-extern "C" BUGTRAP_API void APIENTRY BT_SetExitMode(BUGTRAP_EXITMODE eExitMode)
+extern "C" BUGTRAP_API void BUGTRAP_API_CALL BT_SetExitMode(BUGTRAP_EXITMODE eExitMode)
 {
 	g_eExitMode = eExitMode;
 }
@@ -1293,7 +1293,7 @@ extern "C" BUGTRAP_API void APIENTRY BT_SetExitMode(BUGTRAP_EXITMODE eExitMode)
 /**
  * @return path to report file.
  */
-extern "C" BUGTRAP_API PCTSTR APIENTRY BT_GetReportFilePath(void)
+extern "C" BUGTRAP_API PCTSTR BUGTRAP_API_CALL BT_GetReportFilePath(void)
 {
 	if (*g_szReportFilePath == _T('\0'))
 		SetDefaultReportPath();
@@ -1303,7 +1303,7 @@ extern "C" BUGTRAP_API PCTSTR APIENTRY BT_GetReportFilePath(void)
 /**
  * @param pszReportFilePath - new report path.
  */
-extern "C" BUGTRAP_API void APIENTRY BT_SetReportFilePath(PCTSTR pszReportFilePath)
+extern "C" BUGTRAP_API void BUGTRAP_API_CALL BT_SetReportFilePath(PCTSTR pszReportFilePath)
 {
 	if (pszReportFilePath && *pszReportFilePath)
 		_tcscpy_s(g_szReportFilePath, countof(g_szReportFilePath), pszReportFilePath);
@@ -1314,7 +1314,7 @@ extern "C" BUGTRAP_API void APIENTRY BT_SetReportFilePath(PCTSTR pszReportFilePa
 /**
  * @return name of MAPI profile.
  */
-extern "C" BUGTRAP_API PCTSTR APIENTRY BT_GetMailProfile(void)
+extern "C" BUGTRAP_API PCTSTR BUGTRAP_API_CALL BT_GetMailProfile(void)
 {
 	return g_szMailProfile;
 }
@@ -1323,7 +1323,7 @@ extern "C" BUGTRAP_API PCTSTR APIENTRY BT_GetMailProfile(void)
  * @param pszMailProfile - name of MAPI profile.
  * @param pszMailPassword - password of MAPI profile.
  */
-extern "C" BUGTRAP_API void APIENTRY BT_SetMailProfile(PCTSTR pszMailProfile, PCTSTR pszMailPassword)
+extern "C" BUGTRAP_API void BUGTRAP_API_CALL BT_SetMailProfile(PCTSTR pszMailProfile, PCTSTR pszMailPassword)
 {
 	if (pszMailProfile)
 		_tcscpy_s(g_szMailProfile, countof(g_szMailProfile), pszMailProfile);
@@ -1340,7 +1340,7 @@ extern "C" BUGTRAP_API void APIENTRY BT_SetMailProfile(PCTSTR pszMailProfile, PC
  * @param eLogFormat - log file format (at this moment only text format is supported).
  * @return handle of opened log file or NULL value.
  */
-extern "C" BUGTRAP_API INT_PTR APIENTRY BT_OpenLogFile(PCTSTR pszLogFileName, BUGTRAP_LOGFORMAT eLogFormat)
+extern "C" BUGTRAP_API INT_PTR BUGTRAP_API_CALL BT_OpenLogFile(PCTSTR pszLogFileName, BUGTRAP_LOGFORMAT eLogFormat)
 {
 	CLogFile* pLogFile;
 	switch (eLogFormat)
@@ -1386,7 +1386,7 @@ extern "C" BUGTRAP_API INT_PTR APIENTRY BT_OpenLogFile(PCTSTR pszLogFileName, BU
  * @param iHandle - log file handle.
  * @return true if operation was completed successfully.
  */
-extern "C" BUGTRAP_API BOOL APIENTRY BT_CloseLogFile(INT_PTR iHandle)
+extern "C" BUGTRAP_API BOOL BUGTRAP_API_CALL BT_CloseLogFile(INT_PTR iHandle)
 {
 	BT_FlushLogFile(iHandle);
 	// remove file entry from the list
@@ -1401,7 +1401,7 @@ extern "C" BUGTRAP_API BOOL APIENTRY BT_CloseLogFile(INT_PTR iHandle)
  * @param iHandle - log file handle.
  * @return true if operation was completed successfully.
  */
-extern "C" BUGTRAP_API BOOL APIENTRY BT_FlushLogFile(INT_PTR iHandle)
+extern "C" BUGTRAP_API BOOL BUGTRAP_API_CALL BT_FlushLogFile(INT_PTR iHandle)
 {
 	CLogFile* pLogFile = EnterLogFunction(iHandle);
 	if (! pLogFile)
@@ -1414,7 +1414,7 @@ extern "C" BUGTRAP_API BOOL APIENTRY BT_FlushLogFile(INT_PTR iHandle)
 /**
  * @return user message.
  */
-extern "C" BUGTRAP_API PCTSTR APIENTRY BT_GetUserMessage(void)
+extern "C" BUGTRAP_API PCTSTR BUGTRAP_API_CALL BT_GetUserMessage(void)
 {
 	return g_strUserMessage;
 }
@@ -1422,7 +1422,7 @@ extern "C" BUGTRAP_API PCTSTR APIENTRY BT_GetUserMessage(void)
 /**
  * @param pszUserMessage - user message.
  */
-extern "C" BUGTRAP_API void APIENTRY BT_SetUserMessage(PCTSTR pszUserMessage)
+extern "C" BUGTRAP_API void BUGTRAP_API_CALL BT_SetUserMessage(PCTSTR pszUserMessage)
 {
 	g_strUserMessage = pszUserMessage;
 }
@@ -1430,7 +1430,7 @@ extern "C" BUGTRAP_API void APIENTRY BT_SetUserMessage(PCTSTR pszUserMessage)
 /**
  * @param dwErrorCode - Win32 error code.
  */
-extern "C" BUGTRAP_API void APIENTRY BT_SetUserMessageFromCode(DWORD dwErrorCode)
+extern "C" BUGTRAP_API void BUGTRAP_API_CALL BT_SetUserMessageFromCode(DWORD dwErrorCode)
 {
 	PTSTR pszMessageBuffer = NULL;
 	DWORD dwNumChars = FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_IGNORE_INSERTS | FORMAT_MESSAGE_FROM_SYSTEM,
@@ -1459,7 +1459,7 @@ extern "C" BUGTRAP_API void APIENTRY BT_SetUserMessageFromCode(DWORD dwErrorCode
  * @param hModule - module instance handle. Can be set to NULL for the main executable.
  * @return true operation has been completed successfully.
  */
-extern "C" BUGTRAP_API BOOL APIENTRY BT_ReadVersionInfo(HMODULE hModule)
+extern "C" BUGTRAP_API BOOL BUGTRAP_API_CALL BT_ReadVersionInfo(HMODULE hModule)
 {
 	TCHAR szModuleFileName[MAX_PATH];
 	if (GetModuleFileName(hModule, szModuleFileName, countof(szModuleFileName)) == 0)
@@ -1581,7 +1581,7 @@ static void inline InterceptSUEF(HMODULE hModule, BOOL bOverride)
 /**
  * @return the address of the previous exception filter established with the function.
  */
-extern "C" BUGTRAP_API LPTOP_LEVEL_EXCEPTION_FILTER APIENTRY BT_InstallSehFilter(void)
+extern "C" BUGTRAP_API LPTOP_LEVEL_EXCEPTION_FILTER BUGTRAP_API_CALL BT_InstallSehFilter(void)
 {
 	// Setup unhandled exception handler.
 	PFSetUnhandledExceptionFilter pfnSetUnhandledExceptionFilter = GetOriginalSUEF();
@@ -1594,7 +1594,7 @@ extern "C" BUGTRAP_API LPTOP_LEVEL_EXCEPTION_FILTER APIENTRY BT_InstallSehFilter
 	return g_pfnOldExceptionFilter;
 }
 
-extern "C" BUGTRAP_API void APIENTRY BT_UninstallSehFilter(void)
+extern "C" BUGTRAP_API void BUGTRAP_API_CALL BT_UninstallSehFilter(void)
 {
 	// Restore SetUnhandledExceptionFilter().
 	RestoreSUEF(NULL);
@@ -1635,7 +1635,7 @@ static CStrHolder* GetDialogMessage(BUGTRAP_DIALOGMESSAGE eDialogMessage)
  * @param eDialogMessage - message type.
  * @return message text.
  */
-extern "C" BUGTRAP_API LPCTSTR APIENTRY BT_GetDialogMessage(BUGTRAP_DIALOGMESSAGE eDialogMessage)
+extern "C" BUGTRAP_API LPCTSTR BUGTRAP_API_CALL BT_GetDialogMessage(BUGTRAP_DIALOGMESSAGE eDialogMessage)
 {
 	CStrHolder* pstrDialogMessage = GetDialogMessage(eDialogMessage);
 	if (pstrDialogMessage == NULL || pstrDialogMessage->IsEmpty())
@@ -1648,7 +1648,7 @@ extern "C" BUGTRAP_API LPCTSTR APIENTRY BT_GetDialogMessage(BUGTRAP_DIALOGMESSAG
  * @param eDialogMessage - message type.
  * @param pszMessage - message text.
  */
-extern "C" BUGTRAP_API void APIENTRY BT_SetDialogMessage(BUGTRAP_DIALOGMESSAGE eDialogMessage, LPCTSTR pszMessage)
+extern "C" BUGTRAP_API void BUGTRAP_API_CALL BT_SetDialogMessage(BUGTRAP_DIALOGMESSAGE eDialogMessage, LPCTSTR pszMessage)
 {
 	CStrHolder* pstrDialogMessage = GetDialogMessage(eDialogMessage);
 	if (pstrDialogMessage != NULL)
@@ -2054,7 +2054,7 @@ static void WriteRegError(REGEXPORT_DATA& rRegData, PCTSTR pszRegKey, LONG lResu
  * @param pszRegKey - registry key path.
  * @return > 0 - if registry key was exported; 0 - if registry key was not exported, but error info was stored to a file. < 0 - if function ws not able to allocate memory, create file, etc.
  */
-extern "C" BUGTRAP_API int APIENTRY BT_ExportRegistryKey(LPCTSTR pszRegFile, LPCTSTR pszRegKey)
+extern "C" BUGTRAP_API int BUGTRAP_API_CALL BT_ExportRegistryKey(LPCTSTR pszRegFile, LPCTSTR pszRegKey)
 {
 	int nResult = -1;
 	HKEY hRootKey;
@@ -2154,7 +2154,7 @@ static BOOL InitSnapshot(PEXCEPTION_POINTERS pExceptionPointers)
  * @param pszFileName - snapshot file name or NULL, if you want to generate file name automatically.
  * @return true if operation has been completed successfully.
  */
-extern "C" BUGTRAP_API BOOL APIENTRY BT_SaveSnapshot(PCTSTR pszFileName)
+extern "C" BUGTRAP_API BOOL BUGTRAP_API_CALL BT_SaveSnapshot(PCTSTR pszFileName)
 {
 	// Initialize snapshot.
 	BOOL bFreeSymEngine = InitSnapshot();
@@ -2171,7 +2171,7 @@ extern "C" BUGTRAP_API BOOL APIENTRY BT_SaveSnapshot(PCTSTR pszFileName)
  * @param pszFileName - snapshot file name or NULL, if you want to generate file name automatically.
  * @return true if operation has been completed successfully.
  */
-extern "C" BUGTRAP_API BOOL APIENTRY BT_SaveSnapshotEx(PEXCEPTION_POINTERS pExceptionPointers, PCTSTR pszFileName)
+extern "C" BUGTRAP_API BOOL BUGTRAP_API_CALL BT_SaveSnapshotEx(PEXCEPTION_POINTERS pExceptionPointers, PCTSTR pszFileName)
 {
 	// Initialize snapshot.
 	if (! InitSnapshot(pExceptionPointers))
@@ -2187,7 +2187,7 @@ extern "C" BUGTRAP_API BOOL APIENTRY BT_SaveSnapshotEx(PEXCEPTION_POINTERS pExce
 /**
  * @return true if operation has been completed successfully.
  */
-extern "C" BUGTRAP_API BOOL APIENTRY BT_MailSnapshot(void)
+extern "C" BUGTRAP_API BOOL BUGTRAP_API_CALL BT_MailSnapshot(void)
 {
 	// Initialize snapshot.
 	BOOL bFreeSymEngine = InitSnapshot();
@@ -2203,7 +2203,7 @@ extern "C" BUGTRAP_API BOOL APIENTRY BT_MailSnapshot(void)
  * @param pExceptionPointers - pointer to the exception information.
  * @return true if operation has been completed successfully.
  */
-extern "C" BUGTRAP_API BOOL APIENTRY BT_MailSnapshotEx(PEXCEPTION_POINTERS pExceptionPointers)
+extern "C" BUGTRAP_API BOOL BUGTRAP_API_CALL BT_MailSnapshotEx(PEXCEPTION_POINTERS pExceptionPointers)
 {
 	// Initialize snapshot.
 	if (! InitSnapshot(pExceptionPointers))
@@ -2219,7 +2219,7 @@ extern "C" BUGTRAP_API BOOL APIENTRY BT_MailSnapshotEx(PEXCEPTION_POINTERS pExce
 /**
  * @return true if operation has been completed successfully.
  */
-extern "C" BUGTRAP_API BOOL APIENTRY BT_SendSnapshot(void)
+extern "C" BUGTRAP_API BOOL BUGTRAP_API_CALL BT_SendSnapshot(void)
 {
 	// Initialize snapshot.
 	BOOL bFreeSymEngine = InitSnapshot();
@@ -2235,7 +2235,7 @@ extern "C" BUGTRAP_API BOOL APIENTRY BT_SendSnapshot(void)
  * @param pExceptionPointers - pointer to the exception information.
  * @return true if operation has been completed successfully.
  */
-extern "C" BUGTRAP_API BOOL APIENTRY BT_SendSnapshotEx(PEXCEPTION_POINTERS pExceptionPointers)
+extern "C" BUGTRAP_API BOOL BUGTRAP_API_CALL BT_SendSnapshotEx(PEXCEPTION_POINTERS pExceptionPointers)
 {
 	// Initialize snapshot.
 	if (! InitSnapshot(pExceptionPointers))
@@ -2251,7 +2251,7 @@ extern "C" BUGTRAP_API BOOL APIENTRY BT_SendSnapshotEx(PEXCEPTION_POINTERS pExce
 /**
  * @return Module of interest handle.
  */
-extern "C" BUGTRAP_API HMODULE APIENTRY BT_GetModule()
+extern "C" BUGTRAP_API HMODULE BUGTRAP_API_CALL BT_GetModule()
 {
   return g_hModule;
 }
@@ -2259,7 +2259,7 @@ extern "C" BUGTRAP_API HMODULE APIENTRY BT_GetModule()
 /**
  * @param nModule - module of interest handle.
  */
-extern "C" BUGTRAP_API void APIENTRY BT_SetModule(HMODULE hModule)
+extern "C" BUGTRAP_API void BUGTRAP_API_CALL BT_SetModule(HMODULE hModule)
 {
   g_hModule = hModule;
 }

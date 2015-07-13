@@ -29,11 +29,18 @@
  * BUGTRAP_API functions as being imported from a DLL, whereas this DLL sees symbols
  * defined with this macro as being exported.
  */
-#ifdef BUGTRAP_EXPORTS
- #define BUGTRAP_API __declspec(dllexport)
+#ifndef BUGTRAP_STATIC_EXPORTS
+  #ifdef BUGTRAP_EXPORTS
+    #define BUGTRAP_API __declspec(dllexport)
+    #define BUGTRAP_API_CALL APIENTRY
+  #else
+    #define BUGTRAP_API __declspec(dllimport)
+    #define BUGTRAP_API_CALL APIENTRY
+  #endif // ! BUGTRAP_EXPORTS
 #else
- #define BUGTRAP_API __declspec(dllimport)
-#endif // ! BUGTRAP_EXPORTS
+  #define BUGTRAP_API 
+  #define BUGTRAP_API_CALL __cdecl
+#endif
 
 #ifdef __cplusplus
 extern "C" {
@@ -375,24 +382,24 @@ typedef void (CALLBACK * BT_ErrHandler)(INT_PTR nErrHandlerParam);
 /**
  * @brief Get application name.
  */
-BUGTRAP_API LPCTSTR APIENTRY BT_GetAppName(void);
+BUGTRAP_API LPCTSTR BUGTRAP_API_CALL BT_GetAppName(void);
 /**
  * @brief Set application name of the project where BugTrap is used.
  */
-BUGTRAP_API void APIENTRY BT_SetAppName(LPCTSTR pszAppName);
+BUGTRAP_API void BUGTRAP_API_CALL BT_SetAppName(LPCTSTR pszAppName);
 /**
  * @brief Get application version number.
  */
-BUGTRAP_API LPCTSTR APIENTRY BT_GetAppVersion(void);
+BUGTRAP_API LPCTSTR BUGTRAP_API_CALL BT_GetAppVersion(void);
 /**
  * @brief Set application version number.
  */
-BUGTRAP_API void APIENTRY BT_SetAppVersion(LPCTSTR pszAppVersion);
+BUGTRAP_API void BUGTRAP_API_CALL BT_SetAppVersion(LPCTSTR pszAppVersion);
 /**
  * @brief Read application name and version number from version info block.
  * @note @a hModule can be set to NULL for the main executable.
  */
-BUGTRAP_API BOOL APIENTRY BT_ReadVersionInfo(HMODULE hModule);
+BUGTRAP_API BOOL BUGTRAP_API_CALL BT_ReadVersionInfo(HMODULE hModule);
 /** @} */
 
 /**
@@ -405,11 +412,11 @@ BUGTRAP_API BOOL APIENTRY BT_ReadVersionInfo(HMODULE hModule);
 /**
  * @brief Get module of interest
  */
-BUGTRAP_API HMODULE APIENTRY BT_GetModule();
+BUGTRAP_API HMODULE BUGTRAP_API_CALL BT_GetModule();
 /**
  * @brief Set module of interest
  */
-BUGTRAP_API void APIENTRY BT_SetModule(HMODULE hModule);
+BUGTRAP_API void BUGTRAP_API_CALL BT_SetModule(HMODULE hModule);
 /** @} */
 
 /**
@@ -419,11 +426,11 @@ BUGTRAP_API void APIENTRY BT_SetModule(HMODULE hModule);
 /**
  * @brief Get user defined message displayed on the screen.
  */
-BUGTRAP_API LPCTSTR APIENTRY BT_GetDialogMessage(BUGTRAP_DIALOGMESSAGE eDialogMessage);
+BUGTRAP_API LPCTSTR BUGTRAP_API_CALL BT_GetDialogMessage(BUGTRAP_DIALOGMESSAGE eDialogMessage);
 /**
  * @brief Set user defined message displayed on the screen.
  */
-BUGTRAP_API void APIENTRY BT_SetDialogMessage(BUGTRAP_DIALOGMESSAGE eDialogMessage, LPCTSTR pszMessage);
+BUGTRAP_API void BUGTRAP_API_CALL BT_SetDialogMessage(BUGTRAP_DIALOGMESSAGE eDialogMessage, LPCTSTR pszMessage);
 /** @} */
 
 
@@ -435,19 +442,19 @@ BUGTRAP_API void APIENTRY BT_SetDialogMessage(BUGTRAP_DIALOGMESSAGE eDialogMessa
 /**
  * @brief Get HTTP address of product support site.
  */
-BUGTRAP_API LPCTSTR APIENTRY BT_GetSupportURL(void);
+BUGTRAP_API LPCTSTR BUGTRAP_API_CALL BT_GetSupportURL(void);
 /**
  * @brief Set HTTP address of product support site.
  */
-BUGTRAP_API void APIENTRY BT_SetSupportURL(LPCTSTR pszSupportURL);
+BUGTRAP_API void BUGTRAP_API_CALL BT_SetSupportURL(LPCTSTR pszSupportURL);
 /**
  * @brief Get product support e-mail address.
  */
-BUGTRAP_API LPCTSTR APIENTRY BT_GetSupportEMail(void);
+BUGTRAP_API LPCTSTR BUGTRAP_API_CALL BT_GetSupportEMail(void);
 /**
  * @brief Set product support e-mail address.
  */
-BUGTRAP_API void APIENTRY BT_SetSupportEMail(LPCTSTR pszSupportEMail);
+BUGTRAP_API void BUGTRAP_API_CALL BT_SetSupportEMail(LPCTSTR pszSupportEMail);
 
 /** @} */
 
@@ -463,37 +470,37 @@ BUGTRAP_API void APIENTRY BT_SetSupportEMail(LPCTSTR pszSupportEMail);
  * @brief Get host name of BugTrap Server. This server can automatically
  * gather bug reports for the application.
  */
-BUGTRAP_API LPCTSTR APIENTRY BT_GetSupportHost(void);
+BUGTRAP_API LPCTSTR BUGTRAP_API_CALL BT_GetSupportHost(void);
 /**
  * @brief Set host name (address) of BugTrap Server. This server
  * can automatically gather bug reports for the application.
  */
-BUGTRAP_API void APIENTRY BT_SetSupportHost(LPCTSTR pszSupportHost);
+BUGTRAP_API void BUGTRAP_API_CALL BT_SetSupportHost(LPCTSTR pszSupportHost);
 /**
  * @brief Get port number of BugTrap Server. This server can automatically
  * gather bug reports for the application.
  */
-BUGTRAP_API SHORT APIENTRY BT_GetSupportPort(void);
+BUGTRAP_API SHORT BUGTRAP_API_CALL BT_GetSupportPort(void);
 /**
  * @brief Set port number of BugTrap Server. This server
  * can automatically gather bug reports for the application.
  */
-BUGTRAP_API void APIENTRY BT_SetSupportPort(SHORT nSupportPort);
+BUGTRAP_API void BUGTRAP_API_CALL BT_SetSupportPort(SHORT nSupportPort);
 /**
  * @brief Set host name (address) and port number of BugTrap Server. This server
  * can automatically gather bug reports for the application.
  */
-BUGTRAP_API void APIENTRY BT_SetSupportServer(LPCTSTR pszSupportHost, SHORT nSupportPort);
+BUGTRAP_API void BUGTRAP_API_CALL BT_SetSupportServer(LPCTSTR pszSupportHost, SHORT nSupportPort);
 /**
  * @brief Get error notification e-mail address.
  * BugTrap Server may automatically notify product support by e-mail about new bug reports.
  */
-BUGTRAP_API LPCTSTR APIENTRY BT_GetNotificationEMail(void);
+BUGTRAP_API LPCTSTR BUGTRAP_API_CALL BT_GetNotificationEMail(void);
 /**
  * @brief Set error notification e-mail address.
  * BugTrap Server may automatically notify product support by e-mail about new bug reports.
  */
-BUGTRAP_API void APIENTRY BT_SetNotificationEMail(LPCTSTR pszNotificationEMail);
+BUGTRAP_API void BUGTRAP_API_CALL BT_SetNotificationEMail(LPCTSTR pszNotificationEMail);
 
 /** @} */
 
@@ -508,39 +515,39 @@ BUGTRAP_API void APIENTRY BT_SetNotificationEMail(LPCTSTR pszNotificationEMail);
 /**
  * @brief Get current BugTrap options.
  */
-BUGTRAP_API DWORD APIENTRY BT_GetFlags(void);
+BUGTRAP_API DWORD BUGTRAP_API_CALL BT_GetFlags(void);
 /**
  * @brief Set various BugTrap options.
  */
-BUGTRAP_API void APIENTRY BT_SetFlags(DWORD dwFlags);
+BUGTRAP_API void BUGTRAP_API_CALL BT_SetFlags(DWORD dwFlags);
 /**
  * @brief Get the type of produced mini-dump in detailed mode.
  */
-BUGTRAP_API DWORD APIENTRY BT_GetDumpType(void);
+BUGTRAP_API DWORD BUGTRAP_API_CALL BT_GetDumpType(void);
 /**
  * @brief Set the type of produced mini-dump in detailed mode.
  */
-BUGTRAP_API void APIENTRY BT_SetDumpType(DWORD dwDumpType);
+BUGTRAP_API void BUGTRAP_API_CALL BT_SetDumpType(DWORD dwDumpType);
 /**
  * @brief Get format of error report.
  */
-BUGTRAP_API BUGTRAP_REPORTFORMAT APIENTRY BT_GetReportFormat(void);
+BUGTRAP_API BUGTRAP_REPORTFORMAT BUGTRAP_API_CALL BT_GetReportFormat(void);
 /**
  * @brief Set format of error report.
  */
-BUGTRAP_API void APIENTRY BT_SetReportFormat(BUGTRAP_REPORTFORMAT eReportFormat);
+BUGTRAP_API void BUGTRAP_API_CALL BT_SetReportFormat(BUGTRAP_REPORTFORMAT eReportFormat);
 /**
  * @brief Get user defined message. This message may be printed to a log file.
  */
-BUGTRAP_API LPCTSTR APIENTRY BT_GetUserMessage(void);
+BUGTRAP_API LPCTSTR BUGTRAP_API_CALL BT_GetUserMessage(void);
 /**
  * @brief Set user defined message. This message may be printed to a log file.
  */
-BUGTRAP_API void APIENTRY BT_SetUserMessage(LPCTSTR pszUserMessage);
+BUGTRAP_API void BUGTRAP_API_CALL BT_SetUserMessage(LPCTSTR pszUserMessage);
 /**
  * @brief Set user defined message. This message may be printed to a log file.
  */
-BUGTRAP_API void APIENTRY BT_SetUserMessageFromCode(DWORD dwErrorCode);
+BUGTRAP_API void BUGTRAP_API_CALL BT_SetUserMessageFromCode(DWORD dwErrorCode);
 
 /** @} */
 
@@ -552,36 +559,36 @@ BUGTRAP_API void APIENTRY BT_SetUserMessageFromCode(DWORD dwErrorCode);
 /**
  * @brief Get the type of action which is performed in response to the error.
  */
-BUGTRAP_API BUGTRAP_ACTIVITY APIENTRY BT_GetActivityType(void);
+BUGTRAP_API BUGTRAP_ACTIVITY BUGTRAP_API_CALL BT_GetActivityType(void);
 /**
  * @brief Set the type of action which is performed in response to the error.
  */
-BUGTRAP_API void APIENTRY BT_SetActivityType(BUGTRAP_ACTIVITY eActivityType);
+BUGTRAP_API void BUGTRAP_API_CALL BT_SetActivityType(BUGTRAP_ACTIVITY eActivityType);
 /**
  * @brief Get application termination mode.
  */
-BUGTRAP_API BUGTRAP_EXITMODE APIENTRY BT_GetExitMode(void);
+BUGTRAP_API BUGTRAP_EXITMODE BUGTRAP_API_CALL BT_GetExitMode(void);
 /**
  * @brief Set application termination mode.
  */
-BUGTRAP_API void APIENTRY BT_SetExitMode(BUGTRAP_EXITMODE eExitMode);
+BUGTRAP_API void BUGTRAP_API_CALL BT_SetExitMode(BUGTRAP_EXITMODE eExitMode);
 /**
  * @brief Get the path of error report.
  */
-BUGTRAP_API LPCTSTR APIENTRY BT_GetReportFilePath(void);
+BUGTRAP_API LPCTSTR BUGTRAP_API_CALL BT_GetReportFilePath(void);
 /**
  * @brief Set the path of error report.
  * This function has effect only for @a BTA_SAVEREPORT activity.
  */
-BUGTRAP_API void APIENTRY BT_SetReportFilePath(LPCTSTR pszReportFilePath);
+BUGTRAP_API void BUGTRAP_API_CALL BT_SetReportFilePath(LPCTSTR pszReportFilePath);
 /**
  * @brief Get the name of MAPI profile.
  */
-BUGTRAP_API LPCTSTR APIENTRY BT_GetMailProfile(void);
+BUGTRAP_API LPCTSTR BUGTRAP_API_CALL BT_GetMailProfile(void);
 /**
  * @brief Set the name and password of MAPI profile.
  */
-BUGTRAP_API void APIENTRY BT_SetMailProfile(LPCTSTR pszMailProfile, LPCTSTR pszMailPassword);
+BUGTRAP_API void BUGTRAP_API_CALL BT_SetMailProfile(LPCTSTR pszMailProfile, LPCTSTR pszMailPassword);
 
 /** @} */
 
@@ -593,34 +600,34 @@ BUGTRAP_API void APIENTRY BT_SetMailProfile(LPCTSTR pszMailProfile, LPCTSTR pszM
 /**
  * @brief Export registry key to the file.
  */
-BUGTRAP_API int APIENTRY BT_ExportRegistryKey(LPCTSTR pszRegFile, LPCTSTR pszRegKey);
+BUGTRAP_API int BUGTRAP_API_CALL BT_ExportRegistryKey(LPCTSTR pszRegFile, LPCTSTR pszRegKey);
 /**
  * @brief Add custom log entry to the list of custom log files
  * attached to bug report.
  */
-BUGTRAP_API void APIENTRY BT_AddLogFile(LPCTSTR pszLogFile);
+BUGTRAP_API void BUGTRAP_API_CALL BT_AddLogFile(LPCTSTR pszLogFile);
 /**
  * @brief Add custom log entry to the list of custom log files
  * attached to bug report.
  */
-BUGTRAP_API void APIENTRY BT_AddRegFile(LPCTSTR pszRegFile, LPCTSTR pszRegKey);
+BUGTRAP_API void BUGTRAP_API_CALL BT_AddRegFile(LPCTSTR pszRegFile, LPCTSTR pszRegKey);
 /**
  * @brief Delete custom log entry from the list of custom log files
  * attached to bug report.
  */
-BUGTRAP_API void APIENTRY BT_DeleteLogFile(LPCTSTR pszLogFile);
+BUGTRAP_API void BUGTRAP_API_CALL BT_DeleteLogFile(LPCTSTR pszLogFile);
 /**
  * @brief Clear the list of custom log files attached to bug report.
  */
-BUGTRAP_API void APIENTRY BT_ClearLogFiles(void);
+BUGTRAP_API void BUGTRAP_API_CALL BT_ClearLogFiles(void);
 /**
  * @brief Get number of log files attached to the report.
  */
-BUGTRAP_API DWORD APIENTRY BT_GetLogFilesCount(void);
+BUGTRAP_API DWORD BUGTRAP_API_CALL BT_GetLogFilesCount(void);
 /**
  * @brief This function enumerates log file entries that will be attached to the report.
  */
-BUGTRAP_API DWORD APIENTRY BT_GetLogFileEntry(INT_PTR nLogFileIndexOrName, BOOL bGetByIndex, BUGTRAP_LOGTYPE* peLogType, PDWORD pdwLogEntrySize, PVOID pLogEntry);
+BUGTRAP_API DWORD BUGTRAP_API_CALL BT_GetLogFileEntry(INT_PTR nLogFileIndexOrName, BOOL bGetByIndex, BUGTRAP_LOGTYPE* peLogType, PDWORD pdwLogEntrySize, PVOID pLogEntry);
 
 /** @} */
 
@@ -632,19 +639,19 @@ BUGTRAP_API DWORD APIENTRY BT_GetLogFileEntry(INT_PTR nLogFileIndexOrName, BOOL 
 /**
  * @brief Get address of error handler called before BugTrap dialog.
  */
-BUGTRAP_API BT_ErrHandler APIENTRY BT_GetPreErrHandler(void);
+BUGTRAP_API BT_ErrHandler BUGTRAP_API_CALL BT_GetPreErrHandler(void);
 /**
  * @brief Set address of error handler called before BugTrap dialog.
  */
-BUGTRAP_API void APIENTRY BT_SetPreErrHandler(BT_ErrHandler pfnPreErrHandler, INT_PTR nPreErrHandlerParam);
+BUGTRAP_API void BUGTRAP_API_CALL BT_SetPreErrHandler(BT_ErrHandler pfnPreErrHandler, INT_PTR nPreErrHandlerParam);
 /**
  * @brief Get address of error handler called after BugTrap dialog.
  */
-BUGTRAP_API BT_ErrHandler APIENTRY BT_GetPostErrHandler(void);
+BUGTRAP_API BT_ErrHandler BUGTRAP_API_CALL BT_GetPostErrHandler(void);
 /**
  * @brief Set address of error handler called after BugTrap dialog.
  */
-BUGTRAP_API void APIENTRY BT_SetPostErrHandler(BT_ErrHandler pfnPostErrHandler, INT_PTR nPostErrHandlerParam);
+BUGTRAP_API void BUGTRAP_API_CALL BT_SetPostErrHandler(BT_ErrHandler pfnPostErrHandler, INT_PTR nPostErrHandlerParam);
 
 /** @} */
 
@@ -656,64 +663,64 @@ BUGTRAP_API void APIENTRY BT_SetPostErrHandler(BT_ErrHandler pfnPostErrHandler, 
 /**
  * @brief Open custom log file. This function is thread safe.
  */
-BUGTRAP_API INT_PTR APIENTRY BT_OpenLogFile(LPCTSTR pszLogFileName, BUGTRAP_LOGFORMAT eLogFormat);
+BUGTRAP_API INT_PTR BUGTRAP_API_CALL BT_OpenLogFile(LPCTSTR pszLogFileName, BUGTRAP_LOGFORMAT eLogFormat);
 /**
  * @brief Close custom log file. This function is thread safe.
  */
-BUGTRAP_API BOOL APIENTRY BT_CloseLogFile(INT_PTR iHandle);
+BUGTRAP_API BOOL BUGTRAP_API_CALL BT_CloseLogFile(INT_PTR iHandle);
 /**
  * @brief Flush contents of the log file.
  * @note This function is optional and not required in normal conditions.
  */
-BUGTRAP_API BOOL APIENTRY BT_FlushLogFile(INT_PTR iHandle);
+BUGTRAP_API BOOL BUGTRAP_API_CALL BT_FlushLogFile(INT_PTR iHandle);
 /**
  * @brief Get custom log file name. This function is thread safe.
  */
-BUGTRAP_API LPCTSTR APIENTRY BT_GetLogFileName(INT_PTR iHandle);
+BUGTRAP_API LPCTSTR BUGTRAP_API_CALL BT_GetLogFileName(INT_PTR iHandle);
 /**
  * @brief Get maximum log file size in records. This function is thread safe.
  */
-BUGTRAP_API DWORD APIENTRY BT_GetLogSizeInEntries(INT_PTR iHandle);
+BUGTRAP_API DWORD BUGTRAP_API_CALL BT_GetLogSizeInEntries(INT_PTR iHandle);
 /**
  * @brief Set maximum log file size in records. This function is thread safe.
  */
-BUGTRAP_API BOOL APIENTRY BT_SetLogSizeInEntries(INT_PTR iHandle, DWORD dwLogSizeInEntries);
+BUGTRAP_API BOOL BUGTRAP_API_CALL BT_SetLogSizeInEntries(INT_PTR iHandle, DWORD dwLogSizeInEntries);
 /**
  * @brief Get maximum log file size in bytes. This function is thread safe.
  */
-BUGTRAP_API DWORD APIENTRY BT_GetLogSizeInBytes(INT_PTR iHandle);
+BUGTRAP_API DWORD BUGTRAP_API_CALL BT_GetLogSizeInBytes(INT_PTR iHandle);
 /**
  * @brief Set maximum log file size in bytes. This function is thread safe.
  */
-BUGTRAP_API BOOL APIENTRY BT_SetLogSizeInBytes(INT_PTR iHandle, DWORD dwLogSizeInEntries);
+BUGTRAP_API BOOL BUGTRAP_API_CALL BT_SetLogSizeInBytes(INT_PTR iHandle, DWORD dwLogSizeInEntries);
 /**
  * @brief Return true if time stamp is added to every log entry.
  */
-BUGTRAP_API DWORD APIENTRY BT_GetLogFlags(INT_PTR iHandle);
+BUGTRAP_API DWORD BUGTRAP_API_CALL BT_GetLogFlags(INT_PTR iHandle);
 /**
  * @brief Set true if time stamp is added to every log entry.
  */
-BUGTRAP_API BOOL APIENTRY BT_SetLogFlags(INT_PTR iHandle, DWORD dwLogFlags);
+BUGTRAP_API BOOL BUGTRAP_API_CALL BT_SetLogFlags(INT_PTR iHandle, DWORD dwLogFlags);
 /**
  * @brief Return minimal log level accepted by tracing functions.
  */
-BUGTRAP_API BUGTRAP_LOGLEVEL APIENTRY BT_GetLogLevel(INT_PTR iHandle);
+BUGTRAP_API BUGTRAP_LOGLEVEL BUGTRAP_API_CALL BT_GetLogLevel(INT_PTR iHandle);
 /**
  * @brief Set minimal log level accepted by tracing functions.
  */
-BUGTRAP_API BOOL APIENTRY BT_SetLogLevel(INT_PTR iHandle, BUGTRAP_LOGLEVEL eLogLevel);
+BUGTRAP_API BOOL BUGTRAP_API_CALL BT_SetLogLevel(INT_PTR iHandle, BUGTRAP_LOGLEVEL eLogLevel);
 /**
  * @brief Get echo mode.
  */
-BUGTRAP_API DWORD APIENTRY BT_GetLogEchoMode(INT_PTR iHandle);
+BUGTRAP_API DWORD BUGTRAP_API_CALL BT_GetLogEchoMode(INT_PTR iHandle);
 /**
  * @brief Set echo mode.
  */
-BUGTRAP_API BOOL APIENTRY BT_SetLogEchoMode(INT_PTR iHandle, DWORD dwLogEchoMode);
+BUGTRAP_API BOOL BUGTRAP_API_CALL BT_SetLogEchoMode(INT_PTR iHandle, DWORD dwLogEchoMode);
 /**
  * @brief Clear log file. This function is thread safe.
  */
-BUGTRAP_API BOOL APIENTRY BT_ClearLog(INT_PTR iHandle);
+BUGTRAP_API BOOL BUGTRAP_API_CALL BT_ClearLog(INT_PTR iHandle);
 /**
  * @brief Insert entry into the beginning of custom log file. This function is thread safe.
  */
@@ -725,19 +732,19 @@ BUGTRAP_API BOOL CDECL BT_AppLogEntryF(INT_PTR iHandle, BUGTRAP_LOGLEVEL eLogLev
 /**
  * @brief Insert entry into the beginning of custom log file. This function is thread safe.
  */
-BUGTRAP_API BOOL APIENTRY BT_InsLogEntryV(INT_PTR iHandle, BUGTRAP_LOGLEVEL eLogLevel, LPCTSTR pszFormat, va_list argList);
+BUGTRAP_API BOOL BUGTRAP_API_CALL BT_InsLogEntryV(INT_PTR iHandle, BUGTRAP_LOGLEVEL eLogLevel, LPCTSTR pszFormat, va_list argList);
 /**
  * @brief Append entry to the end of custom log file. This function is thread safe.
  */
-BUGTRAP_API BOOL APIENTRY BT_AppLogEntryV(INT_PTR iHandle, BUGTRAP_LOGLEVEL eLogLevel, LPCTSTR pszFormat, va_list argList);
+BUGTRAP_API BOOL BUGTRAP_API_CALL BT_AppLogEntryV(INT_PTR iHandle, BUGTRAP_LOGLEVEL eLogLevel, LPCTSTR pszFormat, va_list argList);
 /**
  * @brief Insert entry into the beginning of custom log file. This function is thread safe.
  */
-BUGTRAP_API BOOL APIENTRY BT_InsLogEntry(INT_PTR iHandle, BUGTRAP_LOGLEVEL eLogLevel, LPCTSTR pszEntry);
+BUGTRAP_API BOOL BUGTRAP_API_CALL BT_InsLogEntry(INT_PTR iHandle, BUGTRAP_LOGLEVEL eLogLevel, LPCTSTR pszEntry);
 /**
  * @brief Append entry to the end of custom log file. This function is thread safe.
  */
-BUGTRAP_API BOOL APIENTRY BT_AppLogEntry(INT_PTR iHandle, BUGTRAP_LOGLEVEL eLogLevel, LPCTSTR pszEntry);
+BUGTRAP_API BOOL BUGTRAP_API_CALL BT_AppLogEntry(INT_PTR iHandle, BUGTRAP_LOGLEVEL eLogLevel, LPCTSTR pszEntry);
 
 /** @} */
 
@@ -750,12 +757,12 @@ BUGTRAP_API BOOL APIENTRY BT_AppLogEntry(INT_PTR iHandle, BUGTRAP_LOGLEVEL eLogL
  * Explicitly installs BugTrap exception filter.
  * @note Normally you should not call this function.
  */
-BUGTRAP_API LPTOP_LEVEL_EXCEPTION_FILTER APIENTRY BT_InstallSehFilter(void);
+BUGTRAP_API LPTOP_LEVEL_EXCEPTION_FILTER BUGTRAP_API_CALL BT_InstallSehFilter(void);
 /**
  * Explicitly uninstalls BugTrap exception filter and restores the previous exception filter.
  * @note Normally you should not call this function.
  */
-BUGTRAP_API void APIENTRY BT_UninstallSehFilter(void);
+BUGTRAP_API void BUGTRAP_API_CALL BT_UninstallSehFilter(void);
 /**
  * @brief Explicitly intercepts SetUnhandledExceptionFilter() in a module.
  * This function could be useful for dynamically loaded modules.
@@ -764,27 +771,27 @@ BUGTRAP_API void BT_InterceptSUEF(HMODULE hModule, BOOL bOverride);
 /**
  * @brief Take a snapshot of program memory and save it to a file.
  */
-BUGTRAP_API BOOL APIENTRY BT_SaveSnapshot(PCTSTR pszFileName);
+BUGTRAP_API BOOL BUGTRAP_API_CALL BT_SaveSnapshot(PCTSTR pszFileName);
 /**
  * @brief Take a snapshot of program memory and save it to a file.
  */
-BUGTRAP_API BOOL APIENTRY BT_SaveSnapshotEx(PEXCEPTION_POINTERS pExceptionPointers, PCTSTR pszFileName);
+BUGTRAP_API BOOL BUGTRAP_API_CALL BT_SaveSnapshotEx(PEXCEPTION_POINTERS pExceptionPointers, PCTSTR pszFileName);
 /**
  * @brief Take a snapshot of program memory and send over network.
  */
-BUGTRAP_API BOOL APIENTRY BT_SendSnapshot(void);
+BUGTRAP_API BOOL BUGTRAP_API_CALL BT_SendSnapshot(void);
 /**
  * @brief Take a snapshot of program memory and send over network.
  */
-BUGTRAP_API BOOL APIENTRY BT_SendSnapshotEx(PEXCEPTION_POINTERS pExceptionPointers);
+BUGTRAP_API BOOL BUGTRAP_API_CALL BT_SendSnapshotEx(PEXCEPTION_POINTERS pExceptionPointers);
 /**
  * @brief Take a snapshot of program memory and e-mail it.
  */
-BUGTRAP_API BOOL APIENTRY BT_MailSnapshot(void);
+BUGTRAP_API BOOL BUGTRAP_API_CALL BT_MailSnapshot(void);
 /**
  * @brief Take a snapshot of program memory and e-mail it.
  */
-BUGTRAP_API BOOL APIENTRY BT_MailSnapshotEx(PEXCEPTION_POINTERS pExceptionPointers);
+BUGTRAP_API BOOL BUGTRAP_API_CALL BT_MailSnapshotEx(PEXCEPTION_POINTERS pExceptionPointers);
 /**
  * @brief Executes structured exception filter.
  * @note Don't call this function directly in your code.
