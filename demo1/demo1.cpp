@@ -8,6 +8,7 @@
 #include "BugTrap.h"
 #include <imagehlp.h>
 #include <assert.h>
+#include "myThread.h"
 
 static void initMiniDumpInstance()
 {
@@ -29,10 +30,32 @@ void dump()
 	}
 }
 
+class MyThread : public Thread
+{
+protected:
+	//线程主函数
+	virtual int threadMain()
+	{
+		while (true)
+		{
+			if (!(rand() % 100))
+			{
+				dump();
+			}
+			Sleep(50);
+		}
+	}
+};
+
 int _tmain(int argc, _TCHAR* argv[])
 {
 	initMiniDumpInstance();
-	dump();
+	MyThread* pThread = new MyThread;
+	pThread->start();
+	while (true)
+	{
+		Sleep(1000);
+	}
 	return 0;
 }
 

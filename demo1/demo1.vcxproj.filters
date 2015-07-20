@@ -32,5 +32,11 @@
     <ClCompile Include="demo1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Object.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="myThread.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
